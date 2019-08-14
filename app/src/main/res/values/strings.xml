@@ -1,3 +1,53 @@
 <resources>
     <string name="app_name">EmployeeDatabase</string>
+    <string name="select_a_department">Select A Department</string>
+    <string name="show_list">Show List</string>
+    <string name="title_activity_list_employees">List Employees</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="departments">
+        <item>Teacher</item>
+        <item>Administrator</item>
+        <item>Office</item>
+        <item>Principle</item>
+    </string-array>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+    <string name="enter_new_employee">Enter New Employee</string>
+    <string name="delete_employee2">Delete Employee</string>
+    <string name="update_employee2">Update Employee</string>
+    <string name="filter_employee">Filter Employee</string>
+    <string name="Open">Open</string>
+    <string name="Close">Close</string>
+    <string name="ccsd">CCSD</string>
+    <string name="cobb_country_school_district">Cobb Country School District</string>
+    <string name="please_enter_first_name">Please Enter First Name</string>
+    <string name="please_enter_last_name">Please Enter Last Name</string>
+    <string name="please_enter_street_address">Please Enter Street Address</string>
+    <string name="please_enter_city">Please Enter City</string>
+    <string name="please_enter_state">Please Enter State</string>
+    <string name="please_enter_zip">Please Enter Zip</string>
+    <string name="please_enter_tax_id">Please Enter Tax ID</string>
+    <string name="please_enter_position">Please Enter Position</string>
+    <string name="please_enter_department">Please Enter Department</string>
+    <string name="save_employee">Save Employee</string>
+    <string name="back_to_list">Back To List</string>
+    <string name="first_name">first name</string>
+    <string name="last_name">last name</string>
+    <string name="update_employee">Update Employee</string>
+    <string name="delete_employee">Delete Employee</string>
+    <string name="new_employee">New Employee</string>
+    <string name="taxid">taxId</string>
+    <string name="edit_employee">Edit Employee</string>
 </resources>

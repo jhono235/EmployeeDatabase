@@ -8,11 +8,11 @@ public class EmployeeDatabaseContract {
     public static final String TABLE_NAME = "Employee_table";
     public static final String COL_FIRST_NAME = "first";
     public static final String COL_LAST_NAME = "last";
-    public static final String COL_STREET = "street sddress";
+    public static final String COL_STREET = "street";
     public static final String COL_CITY = "city";
     public static final String COL_STATE = "state";
     public static final String COL_ZIP = "zip";
-    public static final String COL_TAXID = "tax id";
+    public static final String COL_TAXID = "tax_id";
     public static final String COL_POSITION = "position";
     public static final String COL_DEPARTMENT = "department";
 
@@ -25,7 +25,7 @@ public class EmployeeDatabaseContract {
     }
 
         public static String getSelectEmployeeByDepartmentQuery(String department){
-            return String.format(Locale.US, "SELECT * FROM %s WHERE %s = \'%s\'", TABLE_NAME, department );
+            return String.format(Locale.US, "SELECT * FROM %s WHERE %s = \'%s\'", TABLE_NAME, COL_DEPARTMENT,department );
         }
 
 }

@@ -21,6 +21,7 @@ import static Data.EmployeeDatabaseContract.DATABASE_NAME;
 import static Data.EmployeeDatabaseContract.DATABASE_VERSION;
 import static Data.EmployeeDatabaseContract.SELECT_ALL_EMPLOYEES;
 import static Data.EmployeeDatabaseContract.TABLE_NAME;
+import static Data.EmployeeDatabaseContract.getSelectEmployeeByDepartmentQuery;
 
 public class EmployeeDatabaseHelper extends SQLiteOpenHelper {
     public EmployeeDatabaseHelper(Context context) {
@@ -42,51 +43,66 @@ public class EmployeeDatabaseHelper extends SQLiteOpenHelper {
     }
 
     //get all items from database
-    public ArrayList<Employee> getAllEmployees(){
+    public ArrayList<Employee> getAllEmployees() {
         SQLiteDatabase readableDataBase = this.getReadableDatabase();
         ArrayList<Employee> returnEmployeeList = new ArrayList<>();
 
         Cursor cursor = readableDataBase.rawQuery(SELECT_ALL_EMPLOYEES, null);
 
-        if (cursor.moveToFirst()){
-            final String taxID = cursor.getString(cursor.getColumnIndex(COL_TAXID));
-            final String firstName = cursor.getString(cursor.getColumnIndex(COL_FIRST_NAME));
-            final String lastName = cursor.getString(cursor.getColumnIndex(COL_LAST_NAME));
-            final String street = cursor.getString(cursor.getColumnIndex(COL_STREET));
-            final String city = cursor.getString(cursor.getColumnIndex(COL_CITY));
-            final String state = cursor.getString(cursor.getColumnIndex(COL_STATE));
-            final String zip = cursor.getString(cursor.getColumnIndex(COL_ZIP));
-            final String position = cursor.getString(cursor.getColumnIndex(COL_POSITION));
-            final String department = cursor.getString(cursor.getColumnIndex(COL_DEPARTMENT));
-            Employee currentEmployee = new Employee(firstName, lastName, street, city, state, zip, taxID, position, department);
-
+        if (cursor.moveToFirst()) {
+            do {
+                final String taxId = cursor.getString(cursor.getColumnIndex(COL_TAXID));
+                final String firstName = cursor.getString(cursor.getColumnIndex(COL_FIRST_NAME));
+                final String lastName = cursor.getString(cursor.getColumnIndex(COL_LAST_NAME));
+                final String street = cursor.getString(cursor.getColumnIndex(COL_STATE));
+                final String city = cursor.getString(cursor.getColumnIndex(COL_CITY));
+                final String state = cursor.getString(cursor.getColumnIndex(COL_STATE));
+                final String zip = cursor.getString(cursor.getColumnIndex(COL_ZIP));
+                final String position = cursor.getString(cursor.getColumnIndex(COL_POSITION));
+                final String department = cursor.getString(cursor.getColumnIndex(COL_DEPARTMENT));
+                Employee currentEmployee = new Employee(taxId, firstName, lastName, street, city, state, zip, position, department);
+                currentEmployee.setFirstName(firstName);
+                currentEmployee.setLastName(lastName);
+                currentEmployee.setTaxID(taxId);
+                returnEmployeeList.add(currentEmployee);
+            } while (cursor.moveToNext());
         }
         cursor.close();
         return returnEmployeeList;
     }
 
-    public Employee getEmployeeByDepartment(String departmentToQuery){
+    public ArrayList<Employee> getEmployeeByDepartment(String deptToQuery){
         SQLiteDatabase readableDataBase = this.getReadableDatabase();
-        Employee returnEmployee = null;
+        ArrayList<Employee> returnEmployee = new ArrayList<>();
 
-        Cursor cursor = readableDataBase.rawQuery(EmployeeDatabaseContract.getSelectEmployeeByDepartmentQuery(departmentToQuery), null);
+
+
+        Cursor cursor = readableDataBase.rawQuery(getSelectEmployeeByDepartmentQuery(deptToQuery), null);
 
         if(cursor.moveToFirst()){
-            final String taxID = cursor.getString(cursor.getColumnIndex(COL_TAXID));
-            final String firstName = cursor.getString(cursor.getColumnIndex(COL_FIRST_NAME));
-            final String lastName = cursor.getString(cursor.getColumnIndex(COL_LAST_NAME));
-            final String street = cursor.getString(cursor.getColumnIndex(COL_STREET));
-            final String city = cursor.getString(cursor.getColumnIndex(COL_CITY));
-            final String state = cursor.getString(cursor.getColumnIndex(COL_STATE));
-            final String zip = cursor.getString(cursor.getColumnIndex(COL_ZIP));
-            final String position = cursor.getString(cursor.getColumnIndex(COL_POSITION));
-            final String department = cursor.getString(cursor.getColumnIndex(COL_DEPARTMENT));
-            returnEmployee = new Employee(firstName, lastName, street, city, state, zip, position, department, taxID);
+            do {
+                final String taxID = cursor.getString(cursor.getColumnIndex(COL_TAXID));
+                final String firstName = cursor.getString(cursor.getColumnIndex(COL_FIRST_NAME));
+                final String lastName = cursor.getString(cursor.getColumnIndex(COL_LAST_NAME));
+                final String street = cursor.getString(cursor.getColumnIndex(COL_STREET));
+                final String city = cursor.getString(cursor.getColumnIndex(COL_CITY));
+                final String state = cursor.getString(cursor.getColumnIndex(COL_STATE));
+                final String zip = cursor.getString(cursor.getColumnIndex(COL_ZIP));
+                final String position = cursor.getString(cursor.getColumnIndex(COL_POSITION));
+                final String department = cursor.getString(cursor.getColumnIndex(COL_DEPARTMENT));
+                Employee currentEmployee = new Employee(firstName, lastName, street, city, state, zip, position, department, taxID);
+                currentEmployee.setDepartment(department);
+                currentEmployee.setTaxID(taxID);
+                returnEmployee.add(currentEmployee);
+
+            }while(cursor.moveToNext());
 
         }
         cursor.close();
         return returnEmployee;
     }
+
+
 
     public void insertEmployeeIntoDatabase(Employee employeeToInsert){
         SQLiteDatabase database = this.getWritableDatabase();
@@ -124,7 +140,35 @@ public class EmployeeDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_POSITION, employeeToUpdate.getPosition());
         contentValues.put(COL_DEPARTMENT, employeeToUpdate.getDepartment());
 
-        database.update(TABLE_NAME, contentValues, COL_TAXID + " = ?", new String[] {employeeToUpdate.getTaxID()});
+        database.update(TABLE_NAME, contentValues, COL_TAXID + "= ?", new String[] {Employee.getTaxID()});
 
     }
+
+    public ArrayList<String> getAllDepartments(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<String> list = new ArrayList<>();
+
+        db.beginTransaction();
+        try {
+            String selectQuery = "SELECT * FROM " + COL_DEPARTMENT;
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    String availableDepartments = cursor.getString(cursor.getColumnIndex("department"));
+                    list.add(availableDepartments);
+
+                }
+            }
+            db.setTransactionSuccessful();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            db.endTransaction();
+            db.close();
+        }
+        return list;
+    }
+
+
 }

@@ -9,7 +9,7 @@ public class Employee {
     private String city;
     private String state;
     private String zip;
-    private String taxID;
+    private static String taxID;
     private String position;
     private String department;
 
@@ -85,7 +85,7 @@ public class Employee {
         this.zip = zip;
     }
 
-    public String getTaxID() {
+    public static String getTaxID() {
         return taxID;
     }
 

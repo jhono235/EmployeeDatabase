@@ -3,15 +3,15 @@ package Data;
 public class Employee {
 
 
-    private String firstName;
-    private String lastName;
-    private String streetAddress;
-    private String city;
-    private String state;
-    private String zip;
+    private static String firstName;
+    private static String lastName;
+    private static String streetAddress;
+    private static String city;
+    private static String state;
+    private static String zip;
     private static String taxID;
-    private String position;
-    private String department;
+    private static String position;
+    private static String department;
 
     public Employee(){
 
@@ -37,7 +37,7 @@ public class Employee {
         this.department = department;
     }
 
-    public String getFirstName() {
+    public static String getFirstName() {
         return firstName;
     }
 
@@ -45,7 +45,7 @@ public class Employee {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
+    public static String getLastName() {
         return lastName;
     }
 
@@ -53,7 +53,7 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public String getStreetAddress() {
+    public static String getStreetAddress() {
         return streetAddress;
     }
 
@@ -61,7 +61,7 @@ public class Employee {
         this.streetAddress = streetAddress;
     }
 
-    public String getCity() {
+    public static String getCity() {
         return city;
     }
 
@@ -69,7 +69,7 @@ public class Employee {
         this.city = city;
     }
 
-    public String getState() {
+    public static String getState() {
         return state;
     }
 
@@ -77,7 +77,7 @@ public class Employee {
         this.state = state;
     }
 
-    public String getZip() {
+    public static String getZip() {
         return zip;
     }
 
@@ -93,7 +93,7 @@ public class Employee {
         this.taxID = taxID;
     }
 
-    public String getPosition() {
+    public static String getPosition() {
         return position;
     }
 
@@ -101,7 +101,7 @@ public class Employee {
         this.position = position;
     }
 
-    public String getDepartment() {
+    public static String getDepartment() {
         return department;
     }
 

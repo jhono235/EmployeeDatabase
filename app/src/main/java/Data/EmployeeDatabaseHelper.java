@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ import static Data.EmployeeDatabaseContract.DATABASE_VERSION;
 import static Data.EmployeeDatabaseContract.SELECT_ALL_EMPLOYEES;
 import static Data.EmployeeDatabaseContract.TABLE_NAME;
 import static Data.EmployeeDatabaseContract.getSelectEmployeeByDepartmentQuery;
+import static Data.EmployeeDatabaseContract.getSelectEmployeeByTaxidQuery;
 
 public class EmployeeDatabaseHelper extends SQLiteOpenHelper {
     public EmployeeDatabaseHelper(Context context) {
@@ -71,13 +73,22 @@ public class EmployeeDatabaseHelper extends SQLiteOpenHelper {
         return returnEmployeeList;
     }
 
-    public ArrayList<Employee> getEmployeeByDepartment(String deptToQuery){
+    public Cursor getEmployeeDetails(String taxId){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor result = db.rawQuery(getSelectEmployeeByTaxidQuery(taxId),null);
+        return result;
+
+
+    }
+
+    public ArrayList<Employee> getEmployeeByDepartment(String department){
         SQLiteDatabase readableDataBase = this.getReadableDatabase();
         ArrayList<Employee> returnEmployee = new ArrayList<>();
 
 
 
-        Cursor cursor = readableDataBase.rawQuery(getSelectEmployeeByDepartmentQuery(deptToQuery), null);
+        Cursor cursor = readableDataBase.rawQuery(getSelectEmployeeByDepartmentQuery(department), null);
 
         if(cursor.moveToFirst()){
             do {
@@ -89,7 +100,7 @@ public class EmployeeDatabaseHelper extends SQLiteOpenHelper {
                 final String state = cursor.getString(cursor.getColumnIndex(COL_STATE));
                 final String zip = cursor.getString(cursor.getColumnIndex(COL_ZIP));
                 final String position = cursor.getString(cursor.getColumnIndex(COL_POSITION));
-                final String department = cursor.getString(cursor.getColumnIndex(COL_DEPARTMENT));
+                department = cursor.getString(cursor.getColumnIndex(COL_DEPARTMENT));
                 Employee currentEmployee = new Employee(firstName, lastName, street, city, state, zip, position, department, taxID);
                 currentEmployee.setDepartment(department);
                 currentEmployee.setTaxID(taxID);
@@ -126,6 +137,8 @@ public class EmployeeDatabaseHelper extends SQLiteOpenHelper {
         database.delete(TABLE_NAME, COL_TAXID + " = ?", new String[]{taxIdToDelete});
     }
 
+
+
     public void updateEmployeeIntoDatabase(Employee employeeToUpdate){
         SQLiteDatabase database = this.getWritableDatabase();
 
@@ -140,8 +153,8 @@ public class EmployeeDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_POSITION, employeeToUpdate.getPosition());
         contentValues.put(COL_DEPARTMENT, employeeToUpdate.getDepartment());
 
-        database.update(TABLE_NAME, contentValues, COL_TAXID + "= ?", new String[] {Employee.getTaxID()});
-
+        database.update(TABLE_NAME, contentValues, COL_TAXID + " = ? ", new String[] {Employee.getTaxID()});
+        //Log.d("TAG", "updateEmployeeIntoDatabase: " + g);
     }
 
     public ArrayList<String> getAllDepartments(){

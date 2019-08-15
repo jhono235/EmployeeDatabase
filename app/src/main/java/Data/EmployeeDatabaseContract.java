@@ -28,4 +28,8 @@ public class EmployeeDatabaseContract {
             return String.format(Locale.US, "SELECT * FROM %s WHERE %s = \'%s\'", TABLE_NAME, COL_DEPARTMENT,department );
         }
 
+    public static String getSelectEmployeeByTaxidQuery(String taxId){
+        return String.format(Locale.US, "SELECT * FROM %s WHERE %s = \'%s\'", TABLE_NAME, COL_TAXID,taxId );
+    }
+
 }

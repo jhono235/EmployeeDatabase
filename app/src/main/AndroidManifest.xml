@@ -9,27 +9,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditEmployee"
-            android:label="@string/edit_employee"></activity>
+        <activity android:name=".ViewDetails"
+            android:label="@string/view_details"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".EditEmployee"
+            android:label="@string/edit_employee"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".UpdateEmployee"
-            android:label="@string/update_employee" />
+            android:label="@string/update_employee"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".DeleteEmployee"
-            android:label="@string/delete_employee" />
+            android:label="@string/delete_employee"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".NewEmployee"
-            android:label="@string/new_employee" />
+            android:label="@string/new_employee"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".ListEmployees"
             android:label="@string/title_activity_list_employees"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleInstance"/>
         <activity
             android:name=".FilterEmployeeActivity"
-            android:label="Filter Employees" />
+            android:label="Filter Employees"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -39,7 +39,7 @@
     <string name="please_enter_state">Please Enter State</string>
     <string name="please_enter_zip">Please Enter Zip</string>
     <string name="please_enter_tax_id">Please Enter Tax ID</string>
-    <string name="please_enter_position">Please Enter Position</string>
+
     <string name="please_enter_department">Please Enter Department</string>
     <string name="save_employee">Save Employee</string>
     <string name="back_to_list">Back To List</string>
@@ -51,4 +51,7 @@
     <string name="taxid">taxId</string>
     <string name="edit_employee">Edit Employee</string>
     <string name="view_details">View Details</string>
+
+    <string name="please_select_department">Please Select Department</string>
+    <string name="please_enter_position">Please Enter Position</string>
 </resources>

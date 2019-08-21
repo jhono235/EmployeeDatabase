@@ -4,21 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import Data.Employee;
-import Data.EmployeeDatabaseHelper;
+import com.example.employeedatabase.data.Employee;
+import com.example.employeedatabase.data.EmployeeDatabaseHelper;
 
 public class FilterEmployeeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Spinner spinnerDepartment;
     String itemStr;
+    String TAG;
 
 
     @Override
@@ -67,6 +66,8 @@ spinnerDepartment.setOnItemSelectedListener(this);
     public void goToList(View view){
         Intent intent = new Intent(this, ListEmployees.class);
         intent.putExtra("data", itemStr);
+
+
         startActivity(intent);
     }
 

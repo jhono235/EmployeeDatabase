@@ -1,29 +1,29 @@
-package Data;
+package com.example.employeedatabase.data;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.ArrayList;
 
-import static Data.EmployeeDatabaseContract.COL_CITY;
-import static Data.EmployeeDatabaseContract.COL_DEPARTMENT;
-import static Data.EmployeeDatabaseContract.COL_FIRST_NAME;
-import static Data.EmployeeDatabaseContract.COL_LAST_NAME;
-import static Data.EmployeeDatabaseContract.COL_POSITION;
-import static Data.EmployeeDatabaseContract.COL_STATE;
-import static Data.EmployeeDatabaseContract.COL_STREET;
-import static Data.EmployeeDatabaseContract.COL_TAXID;
-import static Data.EmployeeDatabaseContract.COL_ZIP;
-import static Data.EmployeeDatabaseContract.DATABASE_NAME;
-import static Data.EmployeeDatabaseContract.DATABASE_VERSION;
-import static Data.EmployeeDatabaseContract.SELECT_ALL_EMPLOYEES;
-import static Data.EmployeeDatabaseContract.TABLE_NAME;
-import static Data.EmployeeDatabaseContract.getSelectEmployeeByDepartmentQuery;
-import static Data.EmployeeDatabaseContract.getSelectEmployeeByTaxidQuery;
+import static com.example.employeedatabase.data.EmployeeDatabaseContract.EmployeeEntry.COL_CITY;
+import static com.example.employeedatabase.data.EmployeeDatabaseContract.EmployeeEntry.COL_DEPARTMENT;
+import static com.example.employeedatabase.data.EmployeeDatabaseContract.EmployeeEntry.COL_FIRST_NAME;
+import static com.example.employeedatabase.data.EmployeeDatabaseContract.EmployeeEntry.COL_LAST_NAME;
+import static com.example.employeedatabase.data.EmployeeDatabaseContract.EmployeeEntry.COL_POSITION;
+import static com.example.employeedatabase.data.EmployeeDatabaseContract.EmployeeEntry.COL_STATE;
+import static com.example.employeedatabase.data.EmployeeDatabaseContract.EmployeeEntry.COL_STREET;
+import static com.example.employeedatabase.data.EmployeeDatabaseContract.EmployeeEntry.COL_TAXID;
+import static com.example.employeedatabase.data.EmployeeDatabaseContract.EmployeeEntry.COL_ZIP;
+import static com.example.employeedatabase.data.EmployeeDatabaseContract.EmployeeEntry.DATABASE_NAME;
+import static com.example.employeedatabase.data.EmployeeDatabaseContract.EmployeeEntry.DATABASE_VERSION;
+import static com.example.employeedatabase.data.EmployeeDatabaseContract.EmployeeEntry.SELECT_ALL_EMPLOYEES;
+import static com.example.employeedatabase.data.EmployeeDatabaseContract.EmployeeEntry.TABLE_NAME;
+import static com.example.employeedatabase.data.EmployeeDatabaseContract.EmployeeEntry.getSelectEmployeeByDepartmentQuery;
+import static com.example.employeedatabase.data.EmployeeDatabaseContract.EmployeeEntry.getSelectEmployeeByTaxidQuery;
+
 
 public class EmployeeDatabaseHelper extends SQLiteOpenHelper {
     public EmployeeDatabaseHelper(Context context) {
@@ -32,14 +32,14 @@ public class EmployeeDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(EmployeeDatabaseContract.getCreateTableQuery());
+        sqLiteDatabase.execSQL(EmployeeDatabaseContract.EmployeeEntry.getCreateTableQuery());
 
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL(EmployeeDatabaseContract.DROP_TABLE_QUERY);
+        sqLiteDatabase.execSQL(EmployeeDatabaseContract.EmployeeEntry.DROP_TABLE_QUERY);
         onCreate(sqLiteDatabase);
 
     }
@@ -56,7 +56,7 @@ public class EmployeeDatabaseHelper extends SQLiteOpenHelper {
                 final String taxId = cursor.getString(cursor.getColumnIndex(COL_TAXID));
                 final String firstName = cursor.getString(cursor.getColumnIndex(COL_FIRST_NAME));
                 final String lastName = cursor.getString(cursor.getColumnIndex(COL_LAST_NAME));
-                final String street = cursor.getString(cursor.getColumnIndex(COL_STATE));
+                final String street = cursor.getString(cursor.getColumnIndex(COL_STREET));
                 final String city = cursor.getString(cursor.getColumnIndex(COL_CITY));
                 final String state = cursor.getString(cursor.getColumnIndex(COL_STATE));
                 final String zip = cursor.getString(cursor.getColumnIndex(COL_ZIP));
@@ -130,11 +130,15 @@ public class EmployeeDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_DEPARTMENT, employeeToInsert.getDepartment());
 
         database.insert(TABLE_NAME, null, contentValues);
+
+
+
     }
 
     public void deleteEmployee(String taxIdToDelete){
         SQLiteDatabase database = this.getWritableDatabase();
         database.delete(TABLE_NAME, COL_TAXID + " = ?", new String[]{taxIdToDelete});
+
     }
 
 
@@ -153,7 +157,7 @@ public class EmployeeDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_POSITION, employeeToUpdate.getPosition());
         contentValues.put(COL_DEPARTMENT, employeeToUpdate.getDepartment());
 
-        database.update(TABLE_NAME, contentValues, COL_TAXID + " = ? ", new String[] {Employee.getTaxID()});
+        database.update(TABLE_NAME, contentValues, COL_TAXID + " = ? ", new String[] {employeeToUpdate.getTaxID()});
         //Log.d("TAG", "updateEmployeeIntoDatabase: " + g);
     }
 

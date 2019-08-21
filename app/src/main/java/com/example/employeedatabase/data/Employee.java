@@ -1,21 +1,19 @@
-package Data;
+package com.example.employeedatabase.data;
 
 public class Employee {
 
 
-    private static String firstName;
-    private static String lastName;
-    private static String streetAddress;
-    private static String city;
-    private static String state;
-    private static String zip;
-    private static String taxID;
-    private static String position;
-    private static String department;
+    private String firstName;
+    private String lastName;
+    private String streetAddress;
+    private String city;
+    private String state;
+    private String zip;
+    private String taxID;
+    private String position;
+    private String department;
 
-    public Employee(){
 
-    }
 
     public Employee(String firstName,
                     String lastName,
@@ -37,7 +35,8 @@ public class Employee {
         this.department = department;
     }
 
-    public static String getFirstName() {
+    public String getFirstName() {
+
         return firstName;
     }
 
@@ -45,7 +44,7 @@ public class Employee {
         this.firstName = firstName;
     }
 
-    public static String getLastName() {
+    public String getLastName() {
         return lastName;
     }
 
@@ -53,7 +52,7 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public static String getStreetAddress() {
+    public String getStreetAddress() {
         return streetAddress;
     }
 
@@ -61,7 +60,7 @@ public class Employee {
         this.streetAddress = streetAddress;
     }
 
-    public static String getCity() {
+    public String getCity() {
         return city;
     }
 
@@ -69,7 +68,7 @@ public class Employee {
         this.city = city;
     }
 
-    public static String getState() {
+    public String getState() {
         return state;
     }
 
@@ -77,7 +76,7 @@ public class Employee {
         this.state = state;
     }
 
-    public static String getZip() {
+    public  String getZip() {
         return zip;
     }
 
@@ -85,7 +84,7 @@ public class Employee {
         this.zip = zip;
     }
 
-    public static String getTaxID() {
+    public String getTaxID() {
         return taxID;
     }
 
@@ -93,7 +92,7 @@ public class Employee {
         this.taxID = taxID;
     }
 
-    public static String getPosition() {
+    public  String getPosition() {
         return position;
     }
 
@@ -101,7 +100,7 @@ public class Employee {
         this.position = position;
     }
 
-    public static String getDepartment() {
+    public String getDepartment() {
         return department;
     }
 

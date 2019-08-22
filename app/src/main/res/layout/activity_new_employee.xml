@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewEmployee"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/etFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textCapSentences"
+        android:hint="@string/please_enter_first_name"/>
+
+    <EditText
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etLastName"
+        android:inputType="textCapSentences"
+        android:hint="@string/please_enter_last_name"/>
+
+    <EditText
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etStreet"
+        android:inputType="textPostalAddress"
+        android:hint="@string/please_enter_street_address"/>
+
+    <EditText
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etCity"
+        android:inputType="textCapSentences"
+        android:hint="@string/please_enter_city"/>
+
+    <EditText
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etState"
+        android:maxLength="2"
+        android:inputType="textCapCharacters"
+        android:hint="@string/please_enter_state"/>
+
+    <EditText
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etZip"
+        android:inputType="number"
+        android:maxLength="5"
+        android:hint="@string/please_enter_zip"/>
+
+    <EditText
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etTaxId"
+        android:inputType="number"
+        android:maxLength="9"
+        android:hint="@string/please_enter_tax_id"/>
+
+    <EditText
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etPositionNew"
+
+        android:inputType="textCapSentences"
+        android:hint="@string/please_enter_position"/>
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etDepartment"
+        android:text="@string/please_select_department"/>
+
+
+
+    <Spinner
+        android:id="@+id/spinnerDepartmentNew"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+         />
+
+
+
+
+    <Button
+        android:id="@+id/btnInsert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="@string/save_employee"/>
+    <Button
+        android:id="@+id/btnGoToMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/back_to_list"
+        android:onClick="onClick"/>
+
+</LinearLayout>

@@ -26,6 +26,8 @@ import static com.example.employeedatabase.data.EmployeeDatabaseContract.Employe
 
 
 public class EmployeeDatabaseHelper extends SQLiteOpenHelper {
+
+
     public EmployeeDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -82,7 +84,7 @@ public class EmployeeDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<Employee> getEmployeeByDepartment(String department){
+    public ArrayList<Employee> getEmployeeByDepartment (String department){
         SQLiteDatabase readableDataBase = this.getReadableDatabase();
         ArrayList<Employee> returnEmployee = new ArrayList<>();
 
@@ -134,6 +136,10 @@ public class EmployeeDatabaseHelper extends SQLiteOpenHelper {
 
 
     }
+
+
+
+
 
     public void deleteEmployee(String taxIdToDelete){
         SQLiteDatabase database = this.getWritableDatabase();

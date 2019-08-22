@@ -1,0 +1,77 @@
+1. What are loaders and how do we implement loaders?
+Mechanism used to load data asynchronously for an activity or fragment. done on a seperate thread. Implemented using LoaderManager
+
+2. What is an AsyncTaskLoader?
+Loads data asynchronously for an activity or fragment away from the main UI thread. Can handle configuration changes and behave within the activity lifecycle. 
+
+3. What is a Handler Thread for?
+A handler thread is used to communicate with the main thread from a worker thread.
+
+4. What are some common threading restrictions in android?
+Making network calls on the UI thread
+
+5. What are thread pools and thread pool executors?
+A FIFO task queue with a group of worker threads. When the UI thread sends tasks to the task queue and when a worker thread becomes available, it removes the task from the front of the queue and starts running it. 
+
+ThreadPoolExecutor allows you to specify how many core threads and how many max threads the pool should create and keep alive time for idle threads. 
+
+
+6. Define the following thread synchronization approaches:
+        - Locks- locking operation that can be executed from anywhere in the code
+        
+        - Mutex-
+        
+        - Semaphores- Take the total number of permits in their constructor, and can limit concurrent access to the resource.
+        
+        - Synchronized- synchronized methods and synchronized statements. Each thread uses a SINGLE key to access the needed code, and the key is not available to following threads until after the thread with the key is finished with its process
+        
+        - Volatile- provides memory visibility and guarantees that the value being read comes from main memory and not the cpu-cache.
+        
+        - Atomic- provide mutating functions for their underlying 
+          primitive value, they are all atomic and thread safe.
+
+7. Define Deadlock conditions- 
+Situation where processes are blocked because each process is holding a resource and waiting for a resource from another process.
+
+8. Define Race conditions- multiple operations occur at the same time and their order affects the result
+
+9.      What is a memory leak?
+When a worker thread holds reference to an object that no longer exists
+
+10. 	10. What is an ANR and what are some common causes?
+Application not responding within 5 seconds or broadcast receiver does not invoke action within 10 seconds. common cause, trying to make a network call via the main ui thread
+
+package com.example.employeedatabase;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
+import android.os.Bundle;
+
+import com.example.employeedatabase.Data.EmployeeDatabaseHelper;
+import com.example.employeedatabase.Data.EmployeeRecyclerViewAdapter;
+
+public class ListEmployees extends AppCompatActivity {
+    Intent i = getIntent();
+    String dataString = i.getStringExtra("data");
+
+    RecyclerView rvEmployeeList;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_list_employees);
+
+        rvEmployeeList = findViewById(R.id.rvEmployeeList);
+        EmployeeDatabaseHelper employeeDatabaseHelper = new EmployeeDatabaseHelper(this);
+
+        EmployeeRecyclerViewAdapter employeeRecyclerViewAdapter = new EmployeeRecyclerViewAdapter(employeeDatabaseHelper.getEmployeeByDepartment(dataString));
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        rvEmployeeList.setLayoutManager(layoutManager);
+        rvEmployeeList.setAdapter(employeeRecyclerViewAdapter);
+
+
+    }
+}
